@@ -41,7 +41,7 @@ checks:
         params:
             maUrl:
                 default: "http://172.17.0.2/esmond/perfsonar/archive/"
-            graphUrl: "http://127.0.0.1/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
+            graphUrl: "http://192.168.1.81:8080/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
             command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row -d %col"
         checkInterval: 240
         retryInterval: 30
@@ -55,7 +55,7 @@ checks:
         params:
             maUrl:
                 default: "http://172.17.0.2/esmond/perfsonar/archive/"
-            graphUrl: "http://127.0.0.1/perfsonar-graphs/?url=%maUrl&dest=%row&source=%col"
+            graphUrl: "http://192.168.1.81:8080/perfsonar-graphs/?url=%maUrl&dest=%row&source=%col"
             command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col -d %row"
         checkInterval: 240
         retryInterval: 30
