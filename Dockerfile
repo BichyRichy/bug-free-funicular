@@ -19,7 +19,7 @@ RUN yum -y install epel-release; yum -y install http://software.internet2.edu/rp
 RUN yum -y install perfsonar-centralmanagement; yum -y install perfsonar-toolkit; yum clean all;
 
 ADD maddash.yaml /etc/maddash/maddash-server/
-ADD su /etc/pam.d/
+## ADD su /etc/pam.d/
 ADD esmondAPI /home/esmondAPI
 
 CMD ["/usr/sbin/init"]
