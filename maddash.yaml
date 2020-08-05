@@ -3,11 +3,11 @@ serverHost: "localhost"
 http: 
     port: 8881
 groups:
-    myOwampHosts :
-        - "test1"
-        - "test2"
-        - "test3"
-        - "test4"
+    myThroughputHosts :
+        - "127.1.0.1"
+        - "127.1.0.2"
+        - "127.1.0.3"
+        - "127.1.0.4"
 groupMembers:
 checks:
     owampLossCheck :
@@ -26,10 +26,10 @@ checks:
         type: "net.es.maddash.checks.PSNagiosCheck"
         params:
             maUrl: 
-                default: "https://%row/esmond/perfsonar/archive"
+                default: "http://127.0.0.1/esmond/perfsonar/archive"
             graphUrl: "https://example.mydomain.local/perfsonar-graphs/?url=%maUrl&dest=%row&source=%col"
-            command: "/usr/lib/nagios/plugins/check_owdelay.pl -u %maUrl -w 0 -c 0 -r 900 -l -p -s %col -d %row"
-        checkInterval: 60
+            command: "/usr/lib64/nagios/plugins/check_owdelay.pl -u %maUrl -w 0 -c 0 -r 900 -l -p -s %col -d %row"
+        checkInterval: 30
         retryInterval: 300
         retryAttempts: 3
         timeout: 60
@@ -40,12 +40,12 @@ checks:
         type: "net.es.maddash.checks.PSNagiosCheck"
         params:
             maUrl:
-                default: "https://%row/esmond/perfsonar/archive"
-            graphUrl: "https://example.mydomain.local/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
-            command:  "/usr/lib/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row -d %col"
-        checkInterval: 28800
-        retryInterval: 600
-        retryAttempts: 3
+                default: "http://127.0.0.1/esmond/perfsonar/archive/"
+            graphUrl: "http://127.0.0.1/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row -d %col"
+        checkInterval: 240
+        retryInterval: 30
+        retryAttempts: 1
         timeout: 60
     throughputRevCheck :
         added_by_psconfig: 1 
@@ -54,35 +54,41 @@ checks:
         type: "net.es.maddash.checks.PSNagiosCheck"
         params:
             maUrl:
-                default: "https://%row/esmond/perfsonar/archive"
-            graphUrl: "https://example.mydomain.local/perfsonar-graphs/?url=%maUrl&dest=%row&source=%col"
-            command:  "/usr/lib/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col -d %row"
-        checkInterval: 28800
-        retryInterval: 600
-        retryAttempts: 3
+                default: "http://127.0.0.1/esmond/perfsonar/archive/"
+            graphUrl: "http://127.0.0.1/perfsonar-graphs/?url=%maUrl&dest=%row&source=%col"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col -d %row"
+        checkInterval: 240
+        retryInterval: 30
+        retryAttempts: 1
         timeout: 60
 grids:
-    - name: "OWAMP"
-      added_by_psconfig: 1 
-      rows: "myOwampHosts"
-      columns: "myOwampHosts"
+    - name: "Throughput"
+      added_by_psconfig: 1
+      rows: "myThroughputHosts"
+      columns: "myThroughputHosts"
       checks: 
-        - "owampLossCheck"
+        - "throughputCheck"
+        - "throughputRevCheck"
       rowOrder: "alphabetical"
       colOrder: "alphabetical"
       excludeSelf: 1
       columnAlgorithm: "all" 
-      report: "loss_mesh_report"
+      report: "throughput_mesh_report"
       statusLabels:
-            ok: "Loss is 0"
-            critical: "Loss is greater than 0"
+            ok: "Throughput >= 100Mbps"
+            warning: "Throughput >= 10Mbps"
+            critical: "Throughput < 10Mbps"
             unknown: "Unable to retrieve data"
             notrun: "Check has not yet run"
+            extra:
+                - value: 5
+                  shortName: EVENT
+                  description: "Down for maintenance"
 dashboards:
     - name: "My Sites"
       added_by_psconfig: 1 
       grids:
-        - name: "OWAMP"
+        - name: "Throughput"
 reports:
     -
         id: "grid_up_down_report"
