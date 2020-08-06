@@ -26,7 +26,7 @@ To create a new user for publishing data, run the following commands in the esmo
 The API key will be displayed in the terminal output. 
 
 ### Publishing Data
-Perfsonar has a Python library for esmond that can be installed with ```pip install esmond-client```. See [pushData](https://github.com/BichyRichy/bug-free-funicular/blob/master/MaddashImage/esmondAPI/pushData.py) for an example of publishing data to the archive in Python.
+Perfsonar has a Python library for esmond that can be installed with ```pip install esmond-client```. See [pushData](https://github.com/BichyRichy/bug-free-funicular/blob/master/MaddashImage/esmondAPI/pushData.py) for example code of publishing data to the archive in Python.
 ### Notes:
 * Need to add [HTTPS encryption](https://httpd.apache.org/docs/2.4/ssl/ssl_howto.html) for the esmond API key.
 * The first time the esmond container is run, the ```esmond``` package needs to be un/reinstalled to run correctly.
