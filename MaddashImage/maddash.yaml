@@ -4,11 +4,20 @@ http:
     port: 8881
 groups:
     myThroughputHosts :
-        - "127.1.0.1"
-        - "127.1.0.2"
-        - "127.1.0.3"
-        - "127.1.0.4"
+        - "osg.chic.nrp.internet2.edu"
+        - "osg.kans.nrp.internet2.edu"
+        - "stashcache.t2.ucsd.edu"
 groupMembers:
+    - added_by_psconfig: 1
+      id: "osg.chic.nrp.internet2.edu"
+      ip: "10.97.162.179"
+    - added_by_psconfig: 1
+      id: "osg.kans.nrp.internet2.edu"
+      ip: "10.96.168.79"
+    - added_by_psconfig: 1
+      id: "stashcache.t2.ucsd.edu"
+      ip: "10.111.200.109"
+      
 checks:
     throughputCheck :
         added_by_psconfig: 1 
@@ -17,11 +26,11 @@ checks:
         type: "net.es.maddash.checks.PSNagiosCheck"
         params:
             maUrl:
-                default: "http://172.17.0.3/esmond/perfsonar/archive/"
-            graphUrl: "http://192.168.1.81:8080/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
-            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row -d %col"
-        checkInterval: 240
-        retryInterval: 30
+                default: "http://localhost/esmond/perfsonar/archive/"
+            graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%col.ip&source=%row.ip"
+            command:  "/usr/lib/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row.ip -d %col.ip"
+        checkInterval: 14400
+        retryInterval: 300
         retryAttempts: 1
         timeout: 60
     throughputRevCheck :
@@ -31,11 +40,11 @@ checks:
         type: "net.es.maddash.checks.PSNagiosCheck"
         params:
             maUrl:
-                default: "http://172.17.0.3/esmond/perfsonar/archive/"
-            graphUrl: "http://192.168.1.81:8080/perfsonar-graphs/?url=%maUrl&dest=%row&source=%col"
-            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col -d %row"
-        checkInterval: 240
-        retryInterval: 30
+                default: "http://localhost/esmond/perfsonar/archive/"
+            graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%row.ip&source=%col.ip"
+            command:  "/usr/lib/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col.ip -d %row.ip"
+        checkInterval: 14400
+        retryInterval: 300
         retryAttempts: 1
         timeout: 60
 grids:
@@ -50,7 +59,6 @@ grids:
       colOrder: "alphabetical"
       excludeSelf: 1
       columnAlgorithm: "all" 
-      report: "throughput_mesh_report"
       statusLabels:
             ok: "Throughput >= 100Mbps"
             warning: "Throughput >= 10Mbps"
