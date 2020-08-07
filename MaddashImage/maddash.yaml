@@ -17,7 +17,6 @@ groupMembers:
     - added_by_psconfig: 1
       id: "stashcache.t2.ucsd.edu"
       ip: "10.111.200.109"
-      
 checks:
     throughputCheck :
         added_by_psconfig: 1 
@@ -28,7 +27,7 @@ checks:
             maUrl:
                 default: "http://localhost/esmond/perfsonar/archive/"
             graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%col.ip&source=%row.ip"
-            command:  "/usr/lib/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row.ip -d %col.ip"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row.ip -d %col.ip"
         checkInterval: 14400
         retryInterval: 300
         retryAttempts: 1
@@ -42,7 +41,7 @@ checks:
             maUrl:
                 default: "http://localhost/esmond/perfsonar/archive/"
             graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%row.ip&source=%col.ip"
-            command:  "/usr/lib/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col.ip -d %row.ip"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col.ip -d %row.ip"
         checkInterval: 14400
         retryInterval: 300
         retryAttempts: 1
