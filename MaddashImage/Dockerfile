@@ -18,8 +18,9 @@ EXPOSE 80
 RUN yum -y install epel-release; yum -y install http://software.internet2.edu/rpms/el7/x86_64/latest/packages/perfSONAR-repo-0.9-1.noarch.rpm; yum -y clean all
 RUN yum -y install perfsonar-centralmanagement; yum -y install perfsonar-toolkit; yum clean all;
 
-ADD maddash.yaml /etc/maddash/maddash-server/
+## ADD maddash.yaml /etc/maddash/maddash-server/
 ## ADD su /etc/pam.d/
 ADD esmondAPI /home/esmondAPI
+ADD psconfig.json /home
 
 CMD ["/usr/sbin/init"]

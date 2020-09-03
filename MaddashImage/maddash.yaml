@@ -3,20 +3,89 @@ serverHost: "localhost"
 http: 
     port: 8881
 groups:
-    myThroughputHosts :
-        - "osg.chic.nrp.internet2.edu"
-        - "osg.kans.nrp.internet2.edu"
-        - "stashcache.t2.ucsd.edu"
+    xRootDhttp :
+      - "k8s-igrok-02.calit2.optiputer.net.xrootd-tpc"
+      - "k8s-igrok-03.calit2.optiputer.net.xrootd-tpc"
+      - "maserati.sciencedmz.nps.edu.xrootd-tpc"
+      - "osg.chic.nrp.internet2.edu.xrootd-tpc"
+      - "k8s-igrok-05.calit2.optiputer.net.xrootd-tpc"
+      - "k8s-gen4-02.calit2.optiputer.net.xrootd-tpc"
+      - "nrp-s1.nysernet.org.xrootd-tpc"
+      - "k8s-igrok-01.calit2.optiputer.net.xrootd-tpc"
+      - "k8s-nvme-01.sdsc.optiputer.net.xrootd-tpc"
+      - "k8s-gpu-03.sdsc.optiputer.net.xrootd-tpc"
+      - "k8s-nvme-01.ultralight.org.xrootd-tpc"
+      - "siderea.ucsc.edu.xrootd-tpc"
+      - "osg.newy32aoa.nrp.internet2.edu.xrootd-tpc"
+      - "k8s-gen4-06.calit2.optiputer.net.xrootd-tpc"
+      - "k8s-gen4-07.calit2.optiputer.net.xrootd-tpc"
+      - "k8s-gen4-08.calit2.optiputer.net.xrootd-tpc"
+      - "k8s-u280-01.calit2.optiputer.net.xrootd-tpc"
+      - "k8s-gen4-01.calit2.optiputer.net.xrootd-tpc"
+      - "uqucsdedgefs.aiq.dc.uq.edu.au.xrootd-tpc"
+      - "osg.kans.nrp.internet2.edu.xrootd-tpc"
+      - "k8s-igrok-06.calit2.optiputer.net.xrootd-tpc"
+      - "k8s-igrok-04.calit2.optiputer.net.xrootd-tpc"
+      - "stashcache.t2.ucsd.edu.xrootd-tpc"
+      - "k8s-epyc-01.sdsc.optiputer.net.xrootd-tpc"
+      - "ps-100g.sdsu.edu.xrootd-tpc"
+      - "k8s-igrok-07.calit2.optiputer.net.xrootd-tpc"
+    xRootDhttps :
+      - "k8s-igrok-02.calit2.optiputer.net"
+      - "k8s-igrok-03.calit2.optiputer.net"
+      - "maserati.sciencedmz.nps.edu"
+      - "osg.chic.nrp.internet2.edu"
+      - "k8s-igrok-05.calit2.optiputer.net"
+      - "k8s-gen4-02.calit2.optiputer.net"
+      - "nrp-s1.nysernet.org"
+      - "k8s-igrok-01.calit2.optiputer.net"
+      - "k8s-nvme-01.sdsc.optiputer.net"
+      - "k8s-gpu-03.sdsc.optiputer.net"
+      - "k8s-nvme-01.ultralight.org"
+      - "siderea.ucsc.edu"
+      - "osg.newy32aoa.nrp.internet2.edu"
+      - "k8s-gen4-06.calit2.optiputer.net"
+      - "k8s-gen4-07.calit2.optiputer.net"
+      - "k8s-gen4-08.calit2.optiputer.net"
+      - "k8s-u280-01.calit2.optiputer.net"
+      - "k8s-gen4-01.calit2.optiputer.net"
+      - "uqucsdedgefs.aiq.dc.uq.edu.au"
+      - "osg.kans.nrp.internet2.edu"
+      - "k8s-igrok-06.calit2.optiputer.net"
+      - "k8s-igrok-04.calit2.optiputer.net"
+      - "stashcache.t2.ucsd.edu"
+      - "k8s-epyc-01.sdsc.optiputer.net"
+      - "ps-100g.sdsu.edu"
+      - "k8s-igrok-07.calit2.optiputer.net"
+    xRootDGridFTP :
+      - "k8s-igrok-02.calit2.optiputer.net"
+      - "k8s-igrok-03.calit2.optiputer.net"
+      - "maserati.sciencedmz.nps.edu"
+      - "osg.chic.nrp.internet2.edu"
+      - "k8s-igrok-05.calit2.optiputer.net"
+      - "k8s-gen4-02.calit2.optiputer.net"
+      - "nrp-s1.nysernet.org"
+      - "k8s-igrok-01.calit2.optiputer.net"
+      - "k8s-nvme-01.sdsc.optiputer.net"
+      - "k8s-gpu-03.sdsc.optiputer.net"
+      - "k8s-nvme-01.ultralight.org"
+      - "siderea.ucsc.edu"
+      - "osg.newy32aoa.nrp.internet2.edu"
+      - "k8s-gen4-06.calit2.optiputer.net"
+      - "k8s-gen4-07.calit2.optiputer.net"
+      - "k8s-gen4-08.calit2.optiputer.net"
+      - "k8s-u280-01.calit2.optiputer.net"
+      - "k8s-gen4-01.calit2.optiputer.net"
+      - "uqucsdedgefs.aiq.dc.uq.edu.au"
+      - "osg.kans.nrp.internet2.edu"
+      - "k8s-igrok-06.calit2.optiputer.net"
+      - "k8s-igrok-04.calit2.optiputer.net"
+      - "stashcache.t2.ucsd.edu"
+      - "k8s-epyc-01.sdsc.optiputer.net"
+      - "ps-100g.sdsu.edu"
+      - "k8s-igrok-07.calit2.optiputer.net"
 groupMembers:
-    - added_by_psconfig: 1
-      id: "osg.chic.nrp.internet2.edu"
-      ip: "10.97.162.179"
-    - added_by_psconfig: 1
-      id: "osg.kans.nrp.internet2.edu"
-      ip: "10.96.168.79"
-    - added_by_psconfig: 1
-      id: "stashcache.t2.ucsd.edu"
-      ip: "10.111.200.109"
+
 checks:
     throughputCheck :
         added_by_psconfig: 1 
@@ -25,10 +94,10 @@ checks:
         type: "net.es.maddash.checks.PSNagiosCheck"
         params:
             maUrl:
-                default: "http://localhost/esmond/perfsonar/archive/"
-            graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%col.ip&source=%row.ip"
-            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row.ip -d %col.ip"
-        checkInterval: 14400
+                default: "https://perfsonar.nautilus.optiputer.net/esmond/perfsonar/archive/"
+            graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row -d %col"
+        checkInterval: 120
         retryInterval: 300
         retryAttempts: 1
         timeout: 60
@@ -39,18 +108,60 @@ checks:
         type: "net.es.maddash.checks.PSNagiosCheck"
         params:
             maUrl:
-                default: "http://localhost/esmond/perfsonar/archive/"
-            graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%row.ip&source=%col.ip"
-            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col.ip -d %row.ip"
-        checkInterval: 14400
+                default: "https://perfsonar.nautilus.optiputer.net/esmond/perfsonar/archive/"
+            graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%row&source=%col"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col -d %row"
+        checkInterval: 120
         retryInterval: 300
         retryAttempts: 1
         timeout: 60
 grids:
-    - name: "Throughput"
+    - name: "GridFTP Throughput"
       added_by_psconfig: 1
-      rows: "myThroughputHosts"
-      columns: "myThroughputHosts"
+      rows: "xRootDGridFTP"
+      columns: "xRootDGridFTP"
+      checks: 
+        - "throughputCheck"
+        - "throughputRevCheck"
+      rowOrder: "alphabetical"
+      colOrder: "alphabetical"
+      excludeSelf: 1
+      columnAlgorithm: "all" 
+      statusLabels:
+            ok: "Throughput >= 100Mbps"
+            warning: "Throughput >= 10Mbps"
+            critical: "Throughput < 10Mbps"
+            unknown: "Unable to retrieve data"
+            notrun: "Check has not yet run"
+            extra:
+                - value: 5
+                  shortName: EVENT
+                  description: "Down for maintenance"
+    - name: "HTTP Throughput"
+      added_by_psconfig: 1
+      rows: "xRootDhttp"
+      columns: "xRootDhttp"
+      checks: 
+        - "throughputCheck"
+        - "throughputRevCheck"
+      rowOrder: "alphabetical"
+      colOrder: "alphabetical"
+      excludeSelf: 1
+      columnAlgorithm: "all" 
+      statusLabels:
+            ok: "Throughput >= 100Mbps"
+            warning: "Throughput >= 10Mbps"
+            critical: "Throughput < 10Mbps"
+            unknown: "Unable to retrieve data"
+            notrun: "Check has not yet run"
+            extra:
+                - value: 5
+                  shortName: EVENT
+                  description: "Down for maintenance"
+    - name: "HTTPS Throughput"
+      added_by_psconfig: 1
+      rows: "xRootDhttps"
+      columns: "xRootDhttps"
       checks: 
         - "throughputCheck"
         - "throughputRevCheck"
@@ -69,7 +180,8 @@ grids:
                   shortName: EVENT
                   description: "Down for maintenance"
 dashboards:
+dashboards:
     - name: "My Sites"
       added_by_psconfig: 1 
       grids:
-        - name: "Throughput"
+        - name: "HTTP Throughput"
