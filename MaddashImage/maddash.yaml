@@ -30,36 +30,51 @@ groups:
       - "k8s-epyc-01.sdsc.optiputer.net"
       - "ps-100g.sdsu.edu"
       - "k8s-igrok-07.calit2.optiputer.net"
+      - "ps-100g-scidmz-0.tools.ucla.net"
 groupMembers:
 
 checks:
-    throughputCheck :
+    XRDthroughputCheck :
         added_by_psconfig: 1 
-        name: "Throughput"
+        name: "XRootD Throughput"
         description: "Throughput from %row to %col (according to %row MA)"
         type: "net.es.maddash.checks.PSNagiosCheck"
         params:
             maUrl:
                 default: "https://perfsonar.nautilus.optiputer.net/esmond/perfsonar/archive/"
-            graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
-            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %row -d %col"
-        checkInterval: 120
+            graphUrl: "https://xrootd-tpc-maddash.nautilus.optiputer.net/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w 30: -c 10: -r 86400 -s %row -d %col --tool xrootd-tpc"
+        checkInterval: 7200
         retryInterval: 300
-        retryAttempts: 1
+        retryAttempts: 3
         timeout: 60
-    throughputRevCheck :
+    GFTPthroughputCheck :
         added_by_psconfig: 1 
-        name: "Throughput Reverse"
-        description: "Throughput from %col to %row (according to %row MA)"
+        name: "GridFTP Throughput"
+        description: "Throughput from %row to %col (according to %row MA)"
         type: "net.es.maddash.checks.PSNagiosCheck"
         params:
             maUrl:
                 default: "https://perfsonar.nautilus.optiputer.net/esmond/perfsonar/archive/"
-            graphUrl: "http://localhost/perfsonar-graphs/?url=%maUrl&dest=%row&source=%col"
-            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w .1: -c .01: -r 86400 -s %col -d %row"
-        checkInterval: 120
+            graphUrl: "https://xrootd-tpc-maddash.nautilus.optiputer.net/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w 30: -c 10: -r 86400 -s %row -d %col --tool gridftp-tpc"
+        checkInterval: 7200
         retryInterval: 300
-        retryAttempts: 1
+        retryAttempts: 3
+        timeout: 60
+    latencyCheck :
+        added_by_psconfig: 1
+        name: "Latency"
+        description: "Latency"
+        type: "net.es.maddash.checks.PSNagiosCheck"
+        params:
+            maUrl:
+                default: "https://perfsonar.nautilus.optiputer.net/esmond/perfsonar/archive/"
+            graphUrl: "https://xrootd-tpc-maddash.nautilus.optiputer.net/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
+            command:  "/usr/lib64/nagios/plugins/check_ping_loss.pl -u %maUrl -w 30: -c 10: -r 86400 -s %row -d %col"
+        checkInterval: 7200
+        retryInterval: 300
+        retryAttempts: 3
         timeout: 60
 grids:
     - name: "GridFTP Throughput"
@@ -67,67 +82,64 @@ grids:
       rows: "hosts"
       columns: "hosts"
       checks: 
-        - "throughputCheck"
-        - "throughputRevCheck"
+        - "GFTPthroughputCheck"
       rowOrder: "alphabetical"
       colOrder: "alphabetical"
       excludeSelf: 1
       columnAlgorithm: "all" 
       statusLabels:
-            ok: "Throughput >= 100Mbps"
-            warning: "Throughput >= 10Mbps"
-            critical: "Throughput < 10Mbps"
+            ok: "Throughput >= 30Gbps"
+            warning: "Throughput >= 10Gbps"
+            critical: "Throughput < 10Gbps"
             unknown: "Unable to retrieve data"
             notrun: "Check has not yet run"
             extra:
                 - value: 5
                   shortName: EVENT
                   description: "Down for maintenance"
-    - name: "HTTP Throughput"
+    - name: "XRootD Throughput"
       added_by_psconfig: 1
       rows: "hosts"
       columns: "hosts"
       checks: 
-        - "throughputCheck"
-        - "throughputRevCheck"
+        - "XRDthroughputCheck"
       rowOrder: "alphabetical"
       colOrder: "alphabetical"
       excludeSelf: 1
       columnAlgorithm: "all" 
       statusLabels:
-            ok: "Throughput >= 100Mbps"
-            warning: "Throughput >= 10Mbps"
-            critical: "Throughput < 10Mbps"
+            ok: "Throughput >= 30Gbps"
+            warning: "Throughput >= 10Gbps"
+            critical: "Throughput < 10Gbps"
             unknown: "Unable to retrieve data"
             notrun: "Check has not yet run"
             extra:
                 - value: 5
                   shortName: EVENT
                   description: "Down for maintenance"
-    - name: "HTTPS Throughput"
+    - name: "Latency"
       added_by_psconfig: 1
       rows: "hosts"
       columns: "hosts"
       checks: 
-        - "throughputCheck"
-        - "throughputRevCheck"
+        - "latencyCheck"
       rowOrder: "alphabetical"
       colOrder: "alphabetical"
       excludeSelf: 1
       columnAlgorithm: "all" 
       statusLabels:
-            ok: "Throughput >= 100Mbps"
-            warning: "Throughput >= 10Mbps"
-            critical: "Throughput < 10Mbps"
+            ok: "Throughput >= 30Gbps"
+            warning: "Throughput >= 10Gbps"
+            critical: "Throughput < 10Gbps"
             unknown: "Unable to retrieve data"
             notrun: "Check has not yet run"
             extra:
                 - value: 5
                   shortName: EVENT
                   description: "Down for maintenance"
-dashboards:
 dashboards:
     - name: "My Sites"
       added_by_psconfig: 1 
       grids:
-        - name: "HTTP Throughput"
+        - name: "XRootD Throughput"
+        - name: "GridFTP Throughput"

@@ -8,21 +8,27 @@ headers = {'Content-Type': 'application/json', 'Authorization': 'Token 589002f2b
 
 payload = {
     "subject-type": "point-to-point",
-    "source": "10.1.1.1",
-    "destination": "10.1.1.2",
+    "source": "198.17.101.70",
+    "destination": "67.58.53.201",
     "tool-name": "pscheduler/iperf3",
-    "measurement-agent": "1.1.1.1",
-    "input-source": "test1.net",
-    "input-destination": "test2.net",
-    "event-types": [{"event-type": "throughput","summaries":[{"summary-type": "aggregation","summary-window": 3600},{"summary-type": "aggregation","summary-window": 86400}]}]
+    "measurement-agent": "198.17.101.70",
+    "input-source": "k8s-epyc-01.sdsc.optiputer.net",
+    "input-destination": "k8s-gen4-01.calit2.optiputer.net",
+    "event-types": [{"event-type": "histogram-owdelay","summaries":[{"summary-type": "aggregation","summary-window": 3600},{"summary-type": "aggregation","summary-window": 86400}]}]
 }
+
 m = requests.post(url, data=json.dumps(payload), headers=headers)
 
 returnJSON = m.json()
 metadataKey = returnJSON['metadata-key']
 
+print(metadataKey)
+
 dat = {
     "ts": int(time.time()),
-    "val": 1000000000
+    "val": {
+        "100": 10,
+        "150": 15
+    }
 }
-d = requests.post("{0}{1}/throughput/base".format(url,metadataKey), data=json.dumps(dat), headers=headers)
+d = requests.post("{0}{1}/histogram-owdelay/base".format(url,metadataKey), data=json.dumps(dat), headers=headers)

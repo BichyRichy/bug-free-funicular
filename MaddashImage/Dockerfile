@@ -1,5 +1,4 @@
-FROM centos:7
-
+FROM opensciencegrid/software-base:fresh
 
 RUN yum -y install httpd; yum clean all; systemctl enable httpd.service
 EXPOSE 80
@@ -12,6 +11,6 @@ ADD maddash.yaml /etc/maddash/maddash-server/
 ## ADD su /etc/pam.d/
 ADD esmondAPI /home/esmondAPI
 ADD psconfig.json /home
-ADD supervisord.conf /etc/supervisord.conf
+ADD supervisord.conf /etc/supervisord.d/10-maddash-server.conf
 
 CMD ["/usr/sbin/init"]
