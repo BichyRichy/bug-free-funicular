@@ -4,33 +4,33 @@ http:
     port: 8881
 groups:
     hosts :
+      - "fiona-100g.ucsc.edu"
+      - "k8s-epyc-01.sdsc.optiputer.net"
+      - "k8s-gen4-01.calit2.optiputer.net"
+      - "k8s-gen4-02.calit2.optiputer.net"
+      - "k8s-gen4-06.calit2.optiputer.net"
+      - "k8s-gen4-07.ultralight.org"
+      - "k8s-gpu-03.sdsc.optiputer.net"
+      - "k8s-igrok-01.calit2.optiputer.net"
       - "k8s-igrok-02.calit2.optiputer.net"
       - "k8s-igrok-03.calit2.optiputer.net"
-      - "maserati.sciencedmz.nps.edu"
-      - "osg.chic.nrp.internet2.edu"
-      - "k8s-igrok-05.calit2.optiputer.net"
-      - "k8s-gen4-02.calit2.optiputer.net"
-      - "nrp-s1.nysernet.org"
-      - "k8s-igrok-01.calit2.optiputer.net"
-      - "k8s-nvme-01.sdsc.optiputer.net"
-      - "k8s-gpu-03.sdsc.optiputer.net"
-      - "k8s-nvme-01.ultralight.org"
-      - "siderea.ucsc.edu"
-      - "osg.newy32aoa.nrp.internet2.edu"
-      - "k8s-gen4-06.calit2.optiputer.net"
-      - "k8s-gen4-07.calit2.optiputer.net"
-      - "k8s-gen4-08.calit2.optiputer.net"
-      - "k8s-u280-01.calit2.optiputer.net"
-      - "k8s-gen4-01.calit2.optiputer.net"
-      - "uqucsdedgefs.aiq.dc.uq.edu.au"
-      - "osg.kans.nrp.internet2.edu"
-      - "k8s-igrok-06.calit2.optiputer.net"
       - "k8s-igrok-04.calit2.optiputer.net"
-      - "stashcache.t2.ucsd.edu"
-      - "k8s-epyc-01.sdsc.optiputer.net"
-      - "ps-100g.sdsu.edu"
+      - "k8s-igrok-05.calit2.optiputer.net"
+      - "k8s-igrok-06.calit2.optiputer.net"
       - "k8s-igrok-07.calit2.optiputer.net"
+      - "k8s-nvme-01.sdsc.optiputer.net"
+      - "k8s-nvme-01.ultralight.org"
+      - "k8s-u280-01.calit2.optiputer.net"
+      - "maserati.sciencedmz.nps.edu"
+      - "nrp-s1.nysernet.org"
+      - "osg.chic.nrp.internet2.edu"
+      - "osg.kans.nrp.internet2.edu"
+      - "osg.newy32aoa.nrp.internet2.edu"
+      - "prp01.ifa.hawaii.edu"
       - "ps-100g-scidmz-0.tools.ucla.net"
+      - "ps-100g.sdsu.edu"
+      - "siderea.ucsc.edu"
+      - "stashcache.t2.ucsd.edu"
 groupMembers:
 
 checks:
@@ -43,7 +43,7 @@ checks:
             maUrl:
                 default: "https://perfsonar.nautilus.optiputer.net/esmond/perfsonar/archive/"
             graphUrl: "https://xrootd-tpc-maddash.nautilus.optiputer.net/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
-            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w 30: -c 10: -r 86400 -s %row -d %col --tool xrootd-tpc"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w 30: -c 10: -r 43200 -s %row -d %col --tool xrootd-tpc"
         checkInterval: 7200
         retryInterval: 300
         retryAttempts: 3
@@ -57,7 +57,7 @@ checks:
             maUrl:
                 default: "https://perfsonar.nautilus.optiputer.net/esmond/perfsonar/archive/"
             graphUrl: "https://xrootd-tpc-maddash.nautilus.optiputer.net/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
-            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w 30: -c 10: -r 86400 -s %row -d %col --tool gridftp-tpc"
+            command:  "/usr/lib64/nagios/plugins/check_throughput.pl -u %maUrl -w 30: -c 10: -r 43200 -s %row -d %col --tool gridftp-tpc"
         checkInterval: 7200
         retryInterval: 300
         retryAttempts: 3
@@ -71,7 +71,7 @@ checks:
             maUrl:
                 default: "https://perfsonar.nautilus.optiputer.net/esmond/perfsonar/archive/"
             graphUrl: "https://xrootd-tpc-maddash.nautilus.optiputer.net/perfsonar-graphs/?url=%maUrl&dest=%col&source=%row"
-            command:  "/usr/lib64/nagios/plugins/check_ping_loss.pl -u %maUrl -w 30: -c 10: -r 86400 -s %row -d %col"
+            command:  "/usr/lib64/nagios/plugins/check_ping_loss.pl -u %maUrl -w 30: -c 10: -r 43200 -s %row -d %col"
         checkInterval: 7200
         retryInterval: 300
         retryAttempts: 3
@@ -133,10 +133,6 @@ grids:
             critical: "Throughput < 10Gbps"
             unknown: "Unable to retrieve data"
             notrun: "Check has not yet run"
-            extra:
-                - value: 5
-                  shortName: EVENT
-                  description: "Down for maintenance"
 dashboards:
     - name: "My Sites"
       added_by_psconfig: 1 

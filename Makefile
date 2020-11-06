@@ -6,7 +6,8 @@ buildEsmond: esmondImage/Dockerfile
 
 buildMaddash: MaddashImage/Dockerfile MaddashImage/maddash.yaml
 	cd MaddashImage
-	docker build --tag mad:perf MaddashImage
+	docker build --tag rygao7/maddash:latest MaddashImage
+	docker push rygao7/maddash:latest
 
 run: runEsmond runMaddash
 
